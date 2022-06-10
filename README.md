@@ -1,4 +1,4 @@
-# Candidate assignment - Tagging photos
+# Candidate assignment - Tagging photos updated
  Client-side app that will show a grid of photos and allow the user to assign each to one or more tags. The tags are defined by the user.
 
 # Project Status
