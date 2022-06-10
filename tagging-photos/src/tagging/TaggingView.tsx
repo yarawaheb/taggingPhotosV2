@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Card from './components/Card';
 import TagBox from './components/TagBox';
 import { BiHelpCircle } from 'react-icons/bi';
+import UnassignedPhotos from './components/UnassignedPhotos';
 
 export default function TaggingView() {
   let[fetching,setFeching]=useState(true)
@@ -23,15 +24,15 @@ export default function TaggingView() {
       });
   },[]);
 
-  function showUnssigned() {
-    let tempArr=[]
-    for (let i = 0; i < allimageArray.length; i++) {
-      if(!signedPhotos.includes(allimageArray[i].id)){
-        tempArr.push(allimageArray[i])
-      }
-    }
-    setUnssignedArray(tempArr)
-  }
+  // function showUnssigned() {
+  //   let tempArr=[]
+  //   for (let i = 0; i < allimageArray.length; i++) {
+  //     if(!signedPhotos.includes(allimageArray[i].id)){
+  //       tempArr.push(allimageArray[i])
+  //     }
+  //   }
+  //   setUnssignedArray(tempArr)
+  // }
 
   function newTag(theNewTag: { name: string; color: string }) {
     if(theNewTag.name===""||!(/^#[0-9A-Fa-f]{6}$/.test(theNewTag.color))){
@@ -54,13 +55,11 @@ export default function TaggingView() {
 
       <div className='left'>
         <button onClick={()=>{setIsAllPhotos(!isAllPhotos)}} className={isAllPhotos?'allClicked':'allNotClicked'}>All photos</button>  
-        <button onClick={()=>{setIsAllPhotos(!isAllPhotos);showUnssigned()}} className={isAllPhotos?'unssignedNotClicked':'unssignedClicked'}>Unassigned photos</button>
+        <button onClick={()=>{setIsAllPhotos(!isAllPhotos)}} className={isAllPhotos?'unssignedNotClicked':'unssignedClicked'}>Unassigned photos</button>
         <div className='topLeft'>
           {isAllPhotos?allimageArray.map((curr,i)=>{
               return <Card key={i} photo={{url:curr.download_url,id: curr.id}} ></Card>
-          }):unssignedImageArray.map((curr,i)=>{
-            return <Card  key={i} photo={{url:curr.download_url,id: curr.id}}  ></Card>
-        })}
+          }):<UnassignedPhotos allimageArray={allimageArray}/>}
         </div>
         
       </div>
