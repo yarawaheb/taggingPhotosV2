@@ -34,6 +34,7 @@ export default function TagBox(props:{tag: { name: string ,color:string} ,case:s
   }
 
   function editTag() {
+    
     for (let i = 0; i < matchingTags.length; i++) {
       if(matchingTags[i].tagInfo.name===props.tag.name){
         matchingTags[i].tagInfo=theNewTag;
@@ -100,11 +101,12 @@ export default function TagBox(props:{tag: { name: string ,color:string} ,case:s
       <div className='tag' style={{
           backgroundColor: theNewTag.color,
         }}>
+          <div className='tagCardAvailable'>
           <span className='tagName' onClick={()=>{setFilter(!filter)}}>{theNewTag.name}</span>
           <div className='editDeleteIcon'>
-            <span onClick={()=>{setIsEditing(!isEditing)}}><FiEdit/></span>
-            <span onClick={()=>deleteTag()}><AiOutlineDelete/></span>
-          </div>
+            <span className='editTagIcon' onClick={()=>{setIsEditing(!isEditing)}}><FiEdit/></span>
+            <span className='deleteTagIcon' onClick={()=>deleteTag()}><AiOutlineDelete/></span>
+          </div></div>
           {isEditing?<div><div className='editTag'>
             <input type="text" defaultValue={theNewTag.name} onBlur={(e)=>{setTag({...theNewTag,name:e.target.value})}}/>
             <div className='colorPicker'>

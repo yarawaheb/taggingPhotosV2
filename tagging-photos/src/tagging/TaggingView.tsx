@@ -14,7 +14,6 @@ export default function TaggingView() {
   let[firstTime,setFirstTime]=useState(true)
   let[isAllPhotos,setIsAllPhotos]=useState(true)
   let[allimageArray,setArray]=useState([{id:0,download_url:""}])
-  let[unssignedImageArray,setUnssignedArray]=useState([{id:0,download_url:""}])
 
   useEffect(()=>{
       axios.get('https://picsum.photos/v2/list')
@@ -23,16 +22,6 @@ export default function TaggingView() {
           setFeching(!fetching)
       });
   },[]);
-
-  // function showUnssigned() {
-  //   let tempArr=[]
-  //   for (let i = 0; i < allimageArray.length; i++) {
-  //     if(!signedPhotos.includes(allimageArray[i].id)){
-  //       tempArr.push(allimageArray[i])
-  //     }
-  //   }
-  //   setUnssignedArray(tempArr)
-  // }
 
   function newTag(theNewTag: { name: string; color: string }) {
     if(theNewTag.name===""||!(/^#[0-9A-Fa-f]{6}$/.test(theNewTag.color))){
@@ -73,12 +62,12 @@ export default function TaggingView() {
         </div>
         <div className='sideBarBottom'>
           {addingTag?<div className='addingNewTag'>
-            <input type="text" placeholder='Label' onBlur={(e)=>{setTag({...theNewTag,name:e.target.value})}}/>
+            <input className='labelTagInput' type="text" placeholder='Label' onBlur={(e)=>{setTag({...theNewTag,name:e.target.value})}}/>
             <div className='colorPicker'>
               <input type="text" placeholder='Hex color' onBlur={(e)=>{setTag({...theNewTag,color:e.target.value})}}/>
               <a href="https://www.w3schools.com/colors/colors_picker.asp?colorhex=ff0000" target="_blank"><BiHelpCircle/></a>
             </div>
-            <button onClick={()=>{newTag(theNewTag);setAddingTag(!addingTag)}}>add</button>
+            <button className='addTagBtn' onClick={()=>{newTag(theNewTag);setAddingTag(!addingTag)}}>add</button>
           </div>:""}
 
           <button className='newTagBtn' onClick={()=>{setAddingTag(!addingTag);setAddingTag(!addingTag)}}>{!addingTag?"New tag":"cancel"}</button>

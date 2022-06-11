@@ -28,14 +28,17 @@
     margin-top: 10%;
     width: 60%;
     height: 60vh;
-    background-color: antiquewhite;
+    background-color: rgb(254, 250, 245);
     display: flex;
     flex-wrap: wrap;
     overflow-y: scroll;
-
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  border-radius: 3px;
 }
 .exit{
-    position: absolute;
     top: 0;
     right: 0;
+    position: sticky;
+    cursor: pointer;
 }
