@@ -7,6 +7,7 @@ import { BiHelpCircle } from 'react-icons/bi'
 import { MdOutlineCancel } from 'react-icons/md'
 
 export default function TagBox(props:{tag: { name: string ,color:string} ,case:string,photo:{imgUrl:string,imgId:number}}) {
+  
   let[imgArray,setImgArr]=useState([{imgId:0,imgUrl:""}])
   let[isEditing,setIsEditing]=useState(false)
   let[isdeleting,setIsDeleting]=useState(false)
@@ -18,13 +19,11 @@ export default function TagBox(props:{tag: { name: string ,color:string} ,case:s
       if (matchingTags[i].tagInfo.name===props.tag.name) {
         setImgArr(matchingTags[i].imgArr);
       }
-    }
-    
+    }  
   },[]);
 
   function matchToTag(): void {    
     setImgArr([...imgArray,{imgId:props.photo.imgId,imgUrl:props.photo.imgUrl}])
-    
     for (let i = 0; i < matchingTags.length; i++) {
       if (matchingTags[i].tagInfo.name===props.tag.name) {
         matchingTags[i].imgArr.push({imgId:props.photo.imgId,imgUrl:props.photo.imgUrl})
@@ -34,13 +33,11 @@ export default function TagBox(props:{tag: { name: string ,color:string} ,case:s
   }
 
   function editTag() {
-    
     for (let i = 0; i < matchingTags.length; i++) {
       if(matchingTags[i].tagInfo.name===props.tag.name){
         matchingTags[i].tagInfo=theNewTag;
       }
     }
-    
   }
 
   function deleteTag(){
@@ -52,7 +49,6 @@ export default function TagBox(props:{tag: { name: string ,color:string} ,case:s
         matchingTags.pop();
       }
     }
-    
     setIsDeleting(true)
   }
 
@@ -89,11 +85,11 @@ export default function TagBox(props:{tag: { name: string ,color:string} ,case:s
         }}>
           <span>{theNewTag.name}</span>
           <div className='matchingGallery'>
-          {imgArray.map((curr,i)=>{
-            return(<div key={i}>
-             {i!=0?<img className='imgInTag' src={curr.imgUrl} alt="" />:null}
-           </div>)
-         })}</div>
+            {imgArray.map((curr,i)=>{
+              return(<div key={i}>
+              {i!=0?<img className='imgInTag' src={curr.imgUrl} alt="" />:null}
+              </div>) })}
+          </div>
       </div>
     </div>
   ):!isdeleting?(

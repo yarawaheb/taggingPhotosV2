@@ -5,6 +5,7 @@ import { matchingTags } from '../TaggingView';
 import './card.css'
 import TagBox from './TagBox';
 export default function Card(props:{photo: { url: string ,id:number}}) {
+
   let[matchingTag,setMatching]=useState(false)
   let[currTags,setCurrTags]=useState([{name:"",color:""}])
 
@@ -18,21 +19,20 @@ export default function Card(props:{photo: { url: string ,id:number}}) {
   
   return (
     <div className='cardLayer'>
-        
-        <img className='imageCard' src={props.photo.url} alt="" />
-        <ul className='cardButtom'>
-          <span className='cardId'>{props.photo.id}</span>
-          <span className='matchingIcon' onClick={()=>{setMatching(!matchingTag);updateTags()}}><BsFillTagsFill/></span>
-        </ul>
-        {matchingTag?
-          <div className='matchingWindow'>
-            <span className='exit' onClick={()=>setMatching(!matchingTag)}><MdOutlineCancel/></span>
-            {currTags.map((curr,i)=>{
-              return <TagBox key={i} tag={curr} case={'matching'} photo={{imgUrl: props.photo.url, imgId: props.photo.id}}  />
-            })}
-          </div>
-          :null
-        }
+      <img className='imageCard' src={props.photo.url} alt="" />
+      <ul className='cardButtom'>
+        <span className='cardId'>{props.photo.id}</span>
+        <span className='matchingIcon' onClick={()=>{setMatching(!matchingTag);updateTags()}}><BsFillTagsFill/></span>
+      </ul>
+      {matchingTag?
+        <div className='matchingWindow'>
+          <span className='exit' onClick={()=>setMatching(!matchingTag)}><MdOutlineCancel/></span>
+          {currTags.map((curr,i)=>{
+            return <TagBox key={i} tag={curr} case={'matching'} photo={{imgUrl: props.photo.url, imgId: props.photo.id}}  />
+          })}
+        </div>
+        :null
+      }
     </div>
   )
 }

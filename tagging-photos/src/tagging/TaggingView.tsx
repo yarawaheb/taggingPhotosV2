@@ -7,6 +7,7 @@ import { BiHelpCircle } from 'react-icons/bi';
 import UnassignedPhotos from './components/UnassignedPhotos';
 
 export default function TaggingView() {
+
   let[fetching,setFeching]=useState(true)
   let[addingTag,setAddingTag]=useState(false)
   let[theNewTag,setTag]=useState({name:"",color:""})
@@ -69,7 +70,6 @@ export default function TaggingView() {
             </div>
             <button className='addTagBtn' onClick={()=>{newTag(theNewTag);setAddingTag(!addingTag)}}>add</button>
           </div>:""}
-
           <button className='newTagBtn' onClick={()=>{setAddingTag(!addingTag);setAddingTag(!addingTag)}}>{!addingTag?"New tag":"cancel"}</button>
         </div> 
       </div>
